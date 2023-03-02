@@ -29,14 +29,25 @@
                 
             </div>
             <div class="nav-m-footer">
-                <div id="nav-btn-collapse" title="Thu gọn"></div>
+                <div @click="btnCloseNavOnClick"
+                id="nav-btn-collapse" title="Thu gọn"></div>
             </div>
         </div>
 </template>
 
 <script>
 export default {
-    name: "TheNavDetail"
+    name: "TheNavDetail",
+    methods: {
+        /**
+         * Ấn nút ẩn menu mở rộng
+         * Author: Trần Xuân Duy
+         * Date: 2/3/2023
+         */
+        btnCloseNavOnClick(){
+            this.$emit("closeNavDetail");
+        }
+    },
 }
 </script>
 

@@ -3,7 +3,7 @@
             <div class="popup-container">
                 <div class="popup-top">
                     <b>Thêm tài sản</b>
-                    <div 
+                    <div @click="closeForm()"
                      class="icon close-icon btn-close"></div>
                 </div>
                 <div class="popup-mid">
@@ -72,7 +72,8 @@
                     </label>
                 </div>
                 <div class="popup-bot">
-                    <button class="btn sub-btn btn-close">Hủy</button>
+                    <button @click="closeForm()"
+                     class="btn sub-btn btn-close" >Hủy</button>
                     <button id="saveBtn" class="btn main-btn">Lưu</button>
                 </div>
             </div>
@@ -85,13 +86,21 @@ export default {
     components: {
     },
     methods: {
-        
+        /**
+         * Đóng form
+         * Author: Trần Xuân Duy
+         * Date: 2/3/3023
+         */
+        closeForm(){
+            this.$emit("closeForm");
+        }
     },
     data() {
         return {
             
         }
     },
+
 
 }
 </script>

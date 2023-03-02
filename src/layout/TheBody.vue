@@ -103,7 +103,7 @@
                         </div>
                         <div class="table-pagging-right">
                             <div class="sum1">17</div>
-                            <div class="sum2">230.000.000</div>
+                            <div class="sum2">23.236.000.000</div>
                             <div  class="sum3">21.421.000</div>
                             <div class="sum4">201.550.000</div>
                         </div>
@@ -112,7 +112,7 @@
                     
                 </div>
     </div>
-    <DForm v-show="isShowForm"></DForm>
+    <DForm v-show="isShowForm" @closeForm="isShowForm=!isShowForm"></DForm>
 </template>
 
 <script>
@@ -122,8 +122,8 @@ export default {
     created() {
         /**
          * Gọi API lấy dữ liệu
-         * author: Trần Xuân Duy
-         * date: 1/3/2023
+         * Author: Trần Xuân Duy
+         * Date: 1/3/2023
          */
         try {
             fetch("https://apidemo.laptrinhweb.edu.vn/api/v1/Employees")
@@ -138,16 +138,16 @@ export default {
     methods: {
         /**
          * Ấn nút hiện form add
-         * author: Trần Xuân Duy
-         * date: 1/3/2023
+         * Author: Trần Xuân Duy
+         * Date: 1/3/2023
          */
         btnAddOnClick(){
             this.isShowForm = true;
         },
         /**
          * Định dạng tiền
-         * author: Trần Xuân Duy
-         * date: 1/3/2023
+         * Author: Trần Xuân Duy
+         * Date: 1/3/2023
          */
         formatMoney(value){
             try {

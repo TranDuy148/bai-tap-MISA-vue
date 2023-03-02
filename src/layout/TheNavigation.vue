@@ -17,7 +17,7 @@
                 id="nav-btn-more" title="Mở rộng"></div>
             </div>
         </div>
-        <TheNavDetail v-else></TheNavDetail>
+        <TheNavDetail v-else @closeNavDetail="isNavMoreShow = false"></TheNavDetail>
 </template>
 
 <script>
@@ -28,6 +28,11 @@ export default {
     TheNavDetail
   },
   methods: {
+    /**
+     * Ấn nút hiện menu chi tiết
+     * Author: Trần Xuân Duy
+     * Date: 1/3/2023
+     */
     btnNavMoreOnClick(){
         this.isNavMoreShow = true;
     }
