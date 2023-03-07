@@ -26,7 +26,7 @@ input::placeholder{
   	outline: none;
 }
 input:focus{
-	border: 1px solid #7bcbdf !important;
+	border: 1px solid #7bcbdf;
   	outline: none;
 }
 .date-box-container{

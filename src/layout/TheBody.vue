@@ -45,7 +45,9 @@
                     <table id="tbPropertyList">
                         <thead>
                             <tr>
-                                <th class="col1" type="checkBox"><input id="check-top" class="checkbox" title="Chọn/Bỏ chọn tất cả" type="checkbox"></th>
+                                <th class="col1" type="checkBox">
+                                    <input id="check-top" class="checkbox" title="Chọn/Bỏ chọn tất cả" type="checkbox">
+                                </th>
                                 <th class="col2" type="stt" title="Số thứ tự">STT</th>
                                 <th class="col3" col-name="EmployeeCode">Mã tài sản</th>
                                 <th class="col4" col-name="FullName">Tên tài sản</th>
@@ -61,7 +63,8 @@
 
                        <tbody>
                             <tr>
-                                <td class="col1"><input class="checkbox" type="checkbox"></td>
+                                <td class="col1">
+                                    <input class="checkbox" type="checkbox"></td>
                                 <td class="col2">1</td>
                                 <td class="col3">MT434343</td>
                                 <td class="col4">Dell Insprion 3487</td>
@@ -76,20 +79,23 @@
                                     <div class="icon detail-icon"></div>
                                 </td>
                             </tr>
-                            <tr v-for="(item,index) in properties" :key="index">
+                            <tr v-for="(item,index) in properties" :key="index"
+                            @dblclick = "btnUpdateOnClick(item)">
                                 <td class="col1"><input class="checkbox" type="checkbox"></td>
-                                <td class="col2">1</td>
+                                <td class="col2">{{ index + 1 }}</td>
                                 <td class="col3">{{ item.EmployeeCode }}</td>
                                 <td class="col4">{{ item.FullName }}</td>
                                 <td class="col5">{{ item.PositionName }}</td>
-                                <td class="col6">{{ item.DepartmentName }}</td>
+                                <td class="col6">{{ item.IdentityPlace }}</td>
                                 <td class="col7">{{ item.WorkStatus }}</td>
                                 <td class="col8">{{ formatMoney(item.PhoneNumber) }}</td>
                                 <td class="col9">{{ formatMoney(item.Salary) }}</td>
                                 <td class="col10">{{ formatMoney(item.PersonalTaxCode) }}</td>
                                 <td class="col11">
-                                    <div class="icon update-icon"></div>
-                                    <div class="icon detail-icon"></div>
+                                    <div @click = "btnUpdateOnClick(item)"
+                                    title="Chỉnh sửa" class="icon update-icon"></div>
+                                    <div @click = "btnDuplicateOnClick(item)"
+                                    title="Nhân bản" class="icon detail-icon"></div>
                                 </td>
                             </tr>
                             
@@ -99,20 +105,40 @@
                     <div class="table-pagging">
                         
                         <div class="table-pagging-left">
-                            <div>Tổng số: <b>200</b> bản ghi</div>
+                            <div>Tổng số: <b>{{ this.properties.length }}</b> bản ghi</div>
+                            <div class="pagging-combobox dropdown">
+                                    <div class="choosen-value">20</div>
+                                    <div class="arrow-down-icon"></div>
+                                    <ul class="option-list">
+                                        <li>1</li>
+                                        <li>2</li>
+                                        <li>3</li>
+                                        <li>4</li>
+                                    </ul>
+                            </div>
+                            <div class="page-number">
+                                <a href="">{{'<'}}</a>
+                                <a href="">1</a>
+                                <a href="">2</a>
+                                <a href="">...</a>
+                                <a href="">{{'>'}}</a>
+
+                            </div>
                         </div>
                         <div class="table-pagging-right">
                             <div class="sum1">17</div>
                             <div class="sum2">23.236.000.000</div>
-                            <div  class="sum3">21.421.000</div>
+                            <div class="sum3">21.421.000</div>
                             <div class="sum4">201.550.000</div>
                         </div>
                     </div> 
                     </div>
-                    
                 </div>
     </div>
-    <DForm v-show="isShowForm" @closeForm="isShowForm=!isShowForm"></DForm>
+    <DForm :formTitle="formTitle"  v-if="isShowForm" @closeForm="onCloseForm"
+    :employeeID = employeeIDSelected
+    ></DForm>
+    <!-- <DForm v-if="isShowUpdateForm" @closeForm="onCloseForm"></DForm> -->
 </template>
 
 <script>
@@ -122,8 +148,7 @@ export default {
     created() {
         /**
          * Gọi API lấy dữ liệu
-         * Author: Trần Xuân Duy
-         * Date: 1/3/2023
+         * Author: Trần Xuân Duy (1/3/2023)
          */
         try {
             fetch("https://apidemo.laptrinhweb.edu.vn/api/v1/Employees")
@@ -131,23 +156,53 @@ export default {
             .then(data =>{
                 this.properties = data;
             })
+            
         } catch (error) {
             console.log(error);
         }
     },
     methods: {
         /**
-         * Ấn nút hiện form add
-         * Author: Trần Xuân Duy
-         * Date: 1/3/2023
+         * Ấn nút hiện form thêm mới
+         * Author: Trần Xuân Duy (1/3/2023)
          */
         btnAddOnClick(){
             this.isShowForm = true;
+            this.formTitle = "Thêm tài sản";
+        },
+        /**
+         * Hàm close form
+         * Author: Trần Xuân Duy (1/3/2023)
+         */
+        onCloseForm(){
+            this.isShowForm= false;
+            this.employeeIDSelected= null;
+        },
+        /**
+         * Ấn nút hiện form sửa thông tin
+         * Author: Trần Xuân Duy (2/3/2023)
+         */
+        btnUpdateOnClick(item){
+            this.isShowForm = true;
+            this.employeeIDSelected = item.EmployeeId;
+            this.formTitle = "Sửa tài sản";
+        },
+        /**
+         * Ấn nút hiện form nhân bản
+         * Author: Trần Xuân Duy (2/3/2023)
+         */
+        btnDuplicateOnClick(item){
+            try {
+                this.isShowForm = true;
+                this.employeeIDSelected = item.EmployeeId;
+                this.formTitle = "Nhân bản tài sản";
+            } catch (error) {
+                console.log(error);
+            }
         },
         /**
          * Định dạng tiền
-         * Author: Trần Xuân Duy
-         * Date: 1/3/2023
+         * Author: Trần Xuân Duy (1/3/2023)
          */
         formatMoney(value){
             try {
@@ -166,6 +221,9 @@ export default {
         return {
             properties: [],
             isShowForm: false,
+            employeeIDSelected: null,
+            formTitle: "",
+
         }
     },
     components:{

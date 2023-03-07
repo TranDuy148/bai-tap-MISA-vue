@@ -88,6 +88,7 @@ tbody tr{
     background-color: #d1edf4;
 }
 .col11 div{
+    margin: 0 5px;
     display: none;
 }
 tr:hover .col11 div{
@@ -122,13 +123,16 @@ tr:hover .col11 div{
     font-weight: 700;
 }
 .sum1{
-    transform: translateX(0px)
+    transform: translateX(22px)
 }
 .sum2{
-    transform: translateX(7px)
+    transform: translateX(18px)
 }
 .sum3{
-    transform: translateX(9px)
+    transform: translateX(16px)
+}
+.sum4{
+    transform: translateX(2px)
 }
 .table-pagging-left {
     width: 50%;
@@ -138,6 +142,7 @@ tr:hover .col11 div{
     padding-left: 17px;
     
 }
+
 .table-pagging-right {
     width: 41%;
     height: 100%;
@@ -146,4 +151,23 @@ tr:hover .col11 div{
     justify-content: space-around;
     padding-right: 105px;
     padding-left: 10px;
+}
+.pagging-combobox{
+    height: 25px;
+    width: 60px;
+    margin-left: 38px !important;
+}
+.pagging-combobox .arrow-down-icon{
+    top: auto;
+}
+.page-number{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+    margin-left: 20px;
+}
+.page-number a {
+    width: 20px;
+    height: 20px;
+    text-decoration: none;
 }
