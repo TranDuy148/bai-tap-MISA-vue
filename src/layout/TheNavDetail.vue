@@ -1,8 +1,8 @@
 <template>
         <div id="navigation-m" class="nav-m">
             <div class="nav-m-top">
-                <div class="logo logo-icon"></div>
-                <div class="product-name">MISA QLTS</div>
+                <div title="MISA QUẢN LÍ TÀI SẢN" class="logo logo-icon"></div>
+                <div title="MISA QUẢN LÍ TÀI SẢN" class="product-name">MISA QLTS</div>
             </div>
             <div class="nav-m-content">
                 <div class="nav-m-item1"><div class="nav-m-icon1"></div>

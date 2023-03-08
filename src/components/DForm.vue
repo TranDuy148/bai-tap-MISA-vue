@@ -34,26 +34,13 @@
                     label="Tên tài sản" :required=true>
                     </DInput>
 
-                    <!-- <label><p>Mã bộ phận sử dụng<span class="red-star"> *</span></p>
-                        <div class="dropdown tf-mabp mar-top-8px">
-                            <div v-text="employee.DepartmentCode"
-                            class="choosen-value"></div>
-                            <div class="arrow-down-icon"></div>
-                            <ul class="option-list">
-                                <li>Bộ phận 1</li>
-                                <li>Bộ phận 2</li>
-                                <li>Bộ phận 3</li>
-                                <li>Bộ phận 4</li>
-                            </ul>
-                        </div>
-                    </label> -->
-                    <DInput
-                    
-                    :classInput="'tf-mabp '"
-                    :placeholderInput="'Chọn mã bộ phận sử dụng'"
-                    :modelValue="employee.FirstName"
-                    label="Mã bộ phận sử dụng" :required=true>
-                    </DInput>
+                    <DCombobox 
+                    api="https://apidemo.laptrinhweb.edu.vn/api/v1/Departments"
+                    propName="DepartmentCode"
+                    propValue="DepartmentId"
+                    v-model="employee.DepartmentId"
+                    label="Mã bộ phận sử dụng"
+                    ></DCombobox>
                     
                     <!-- <label><p>Tên bộ phận sử dụng</p>
                         <input v-model="employee.IdentityPlace" 
@@ -67,7 +54,7 @@
                     disabledInput>
                     </DInput>
 
-                    <label><p>Mã loại tài sản<span class="red-star"> *</span></p>
+                    <!-- <label><p>Mã loại tài sản<span class="red-star"> *</span></p>
                         
                         <div class="dropdown tf-maloaits mar-top-8px">
                             <div v-text="employee.DepartmentCode"
@@ -80,7 +67,15 @@
                                 <li>Loại 4</li>
                             </ul>
                         </div>
-                    </label>
+                    </label> -->
+                    <DCombobox 
+                    api="https://apidemo.laptrinhweb.edu.vn/api/v1/Positions"
+                    propName="PositionCode"
+                    propValue="PositionId"
+                    v-model="employee.PositionId"
+                    label="Mã loại tài sản"
+                    ></DCombobox>
+
                     <!-- <label><p>Tên loại tài sản</p>
                         <input v-model="employee.MartialStatusName"
                         type="text" class="text-field tf-tenloaits disable-text" placeholder="" disabled="">
@@ -193,13 +188,22 @@
 </template>
 
 <script>
+import DCombobox from '../components/base/DCombobox.vue'
 import DInput from './base/DInput.vue';
 export default {
     name: "DForm",
     components: {
-        DInput
+        DInput, DCombobox
     },
     props:["employeeID","formTitle"],
+    watch: {
+        employee: {
+            handler: function(newValue){
+                console.log("Value thay đổi: ", newValue.PositionId);
+            },
+            deep: true
+        }
+    },
     methods: {
         /**
          * Đóng form
@@ -224,15 +228,16 @@ export default {
         
     },
     mounted() {
+        //set focus cho input
         this.$refs["txtEmployeeCode"].setFocus();
         console.log(this.formTitle);
     },
-    
     data() {
         return {
-            employee:{},
-            duy:{
-                name: "Trần XUân Duy"
+            // employee:{},
+            employee:{
+                name: "Trần XUân Duy",
+                PositionId: "589edf01-198a-4ff5-958e-fb52fd75a1d4",
             }
         }
     },

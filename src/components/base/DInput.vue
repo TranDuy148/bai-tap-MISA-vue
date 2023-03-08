@@ -70,7 +70,7 @@ export default {
             })
         },
         /**
-         * đặt giá trị mặc địnnh là ngày hôm nay
+         * đặt giá trị mặc địnnh năm theo dõi là ngày hôm nay
          * author: Trần Xuân Duy
          * date: 7/3/2023
          */

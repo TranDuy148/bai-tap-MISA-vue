@@ -62,7 +62,7 @@
                         </thead>
 
                        <tbody>
-                            <tr>
+                            <tr class="tr-data">
                                 <td class="col1">
                                     <input class="checkbox" type="checkbox"></td>
                                 <td class="col2">1</td>
@@ -79,7 +79,8 @@
                                     <div class="icon detail-icon"></div>
                                 </td>
                             </tr>
-                            <tr v-for="(item,index) in properties" :key="index"
+                            <tr class="tr-data"
+                            v-for="(item,index) in properties" :key="index"
                             @dblclick = "btnUpdateOnClick(item)">
                                 <td class="col1"><input class="checkbox" type="checkbox"></td>
                                 <td class="col2">{{ index + 1 }}</td>
@@ -98,12 +99,48 @@
                                     title="Nhân bản" class="icon detail-icon"></div>
                                 </td>
                             </tr>
-                            
+                            <tr class="table-pagging-tr">
+                                <td colspan="6">
+                                    <div class="table-pagging-left">
+                                    <div class="count-data">Tổng số: <b>{{ this.properties.length }}</b> bản ghi</div>
+                                    <div class="pagging-combobox dropdown">
+                                        <div class="choosen-value">20</div>
+                                        <div class="arrow-down-icon"></div>
+                                        <ul class="option-list">
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                            <li>4</li>
+                                        </ul>
+                                    </div>
+                                    <div class="page-number">
+                                        <a title="Trang trước" href="">{{'<'}}</a>
+                                        <a href="">1</a>
+                                        <a href="">2</a>
+                                        <a href="">...</a>
+                                        <a title="Trang sau" href="">{{'>'}}</a>
+
+                                    </div>
+                                </div>
+                                </td>
+                                <td class="text-align-right">
+                                    <b>17</b>
+                                </td>
+                                <td class="text-align-right">
+                                    <b>23.236.000.000</b>
+                                </td>
+                                <td class="text-align-right">
+                                    <b>21.421.000</b>
+                                </td>
+                                <td class="text-align-right">
+                                    <b>201.550.000</b>
+                                </td>
+                                <td></td>
+                            </tr>
                        </tbody>
                         
                     </table>
-                    <div class="table-pagging">
-                        
+                    <!-- <div class="table-pagging">
                         <div class="table-pagging-left">
                             <div>Tổng số: <b>{{ this.properties.length }}</b> bản ghi</div>
                             <div class="pagging-combobox dropdown">
@@ -131,7 +168,7 @@
                             <div class="sum3">21.421.000</div>
                             <div class="sum4">201.550.000</div>
                         </div>
-                    </div> 
+                    </div>  -->
                     </div>
                 </div>
     </div>
